@@ -527,11 +527,20 @@ function renderScreenBarChart(rangeStart, rangeEnd) {
   const H = canvas.height;
   ctx.clearRect(0, 0, W, H);
 
+  // Read theme colors from CSS variables
+  const styles = getComputedStyle(document.documentElement);
+  const chartText = styles.getPropertyValue('--chart-text').trim() || 'rgba(255,255,255,0.75)';
+  const chartGrid = styles.getPropertyValue('--chart-grid').trim() || 'rgba(255,255,255,0.10)';
+  const chartLabel = styles.getPropertyValue('--chart-label').trim() || 'rgba(255,255,255,0.70)';
+  const barFillStart = styles.getPropertyValue('--bar-fill-start').trim() || 'rgba(96,165,250,0.65)';
+  const barFillEnd = styles.getPropertyValue('--bar-fill-end').trim() || 'rgba(96,165,250,0.15)';
+  const barStroke = styles.getPropertyValue('--bar-stroke').trim() || 'rgba(96,165,250,0.35)';
+
   // Background grid
   ctx.globalAlpha = 1;
   ctx.font = '12px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial';
-  ctx.fillStyle = 'rgba(255,255,255,0.75)';
-  ctx.strokeStyle = 'rgba(255,255,255,0.10)';
+  ctx.fillStyle = chartText;
+  ctx.strokeStyle = chartGrid;
   ctx.lineWidth = 1;
 
   const plotW = W - padL - padR;
@@ -564,10 +573,10 @@ function renderScreenBarChart(rangeStart, rangeEnd) {
 
     // Gradient fill per bar
     const grad = ctx.createLinearGradient(x, y, x, y + h);
-    grad.addColorStop(0, 'rgba(96,165,250,0.65)');
-    grad.addColorStop(1, 'rgba(96,165,250,0.15)');
+    grad.addColorStop(0, barFillStart);
+    grad.addColorStop(1, barFillEnd);
     ctx.fillStyle = grad;
-    ctx.strokeStyle = 'rgba(96,165,250,0.35)';
+    ctx.strokeStyle = barStroke;
 
     // Rounded top corners only
     const r = 10;
@@ -579,7 +588,7 @@ function renderScreenBarChart(rangeStart, rangeEnd) {
     const [yyyy, mm, dd] = keys[i].split('-').map(Number);
     const label = `${mm}/${dd}`;
     const tx = x + Math.floor(barW / 2) - ctx.measureText(label).width / 2;
-    ctx.fillStyle = 'rgba(255,255,255,0.70)';
+    ctx.fillStyle = chartLabel;
     ctx.fillText(label, tx, H - 16);
   }
 

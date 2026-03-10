@@ -1,12 +1,121 @@
 :root {
+  --radius: 18px;
+}
+
+/* Dark theme (default) */
+:root, [data-theme="dark"] {
+  color-scheme: dark;
   --bg: #0b0f17;
+  --bg-gradient: radial-gradient(1200px 800px at 20% 0%, #1a2240 0%, #0b0f17 55%) fixed;
   --card: rgba(255,255,255,0.06);
   --card2: rgba(255,255,255,0.08);
   --text: rgba(255,255,255,0.92);
   --muted: rgba(255,255,255,0.66);
   --line: rgba(255,255,255,0.10);
   --shadow: 0 10px 35px rgba(0,0,0,0.35);
-  --radius: 18px;
+  --btn-bg: rgba(255,255,255,0.10);
+  --btn-hover: rgba(255,255,255,0.14);
+  --btn-secondary: rgba(255,255,255,0.16);
+  --pill-bg: rgba(0,0,0,0.15);
+  --file-border: rgba(255,255,255,0.20);
+  --file-bg: rgba(0,0,0,0.10);
+  --kpi-bg: rgba(0,0,0,0.14);
+  --thead-bg: rgba(0,0,0,0.22);
+  --thead-color: rgba(255,255,255,0.80);
+  --td-color: rgba(255,255,255,0.88);
+  --tr-even: rgba(255,255,255,0.04);
+  --tr-hover: rgba(255,255,255,0.08);
+  --chart-bg: rgba(0,0,0,0.12);
+  --modal-bg: linear-gradient(180deg, #1c2540, #131825);
+  --modal-overlay: rgba(0,0,0,0.60);
+  --code-bg: rgba(0,0,0,0.28);
+  --error-border: rgba(255,120,120,0.35);
+  --error-bg: rgba(255,80,80,0.10);
+  --error-text: rgba(220,220,220,0.95);
+  --bar-fill-start: rgba(96,165,250,0.65);
+  --bar-fill-end: rgba(96,165,250,0.15);
+  --bar-stroke: rgba(96,165,250,0.35);
+  --chart-text: rgba(255,255,255,0.75);
+  --chart-grid: rgba(255,255,255,0.10);
+  --chart-label: rgba(255,255,255,0.70);
+}
+
+/* Light theme */
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f5f6fa;
+  --bg-gradient: radial-gradient(1200px 800px at 20% 0%, #e0e5f0 0%, #f5f6fa 55%) fixed;
+  --card: rgba(255,255,255,0.85);
+  --card2: rgba(255,255,255,0.95);
+  --text: rgba(0,0,0,0.88);
+  --muted: rgba(0,0,0,0.55);
+  --line: rgba(0,0,0,0.10);
+  --shadow: 0 10px 35px rgba(0,0,0,0.08);
+  --btn-bg: rgba(0,0,0,0.06);
+  --btn-hover: rgba(0,0,0,0.10);
+  --btn-secondary: rgba(0,0,0,0.08);
+  --pill-bg: rgba(0,0,0,0.04);
+  --file-border: rgba(0,0,0,0.15);
+  --file-bg: rgba(0,0,0,0.03);
+  --kpi-bg: rgba(0,0,0,0.03);
+  --thead-bg: rgba(0,0,0,0.04);
+  --thead-color: rgba(0,0,0,0.70);
+  --td-color: rgba(0,0,0,0.80);
+  --tr-even: rgba(0,0,0,0.02);
+  --tr-hover: rgba(0,0,0,0.05);
+  --chart-bg: rgba(0,0,0,0.03);
+  --modal-bg: linear-gradient(180deg, #ffffff, #f0f1f5);
+  --modal-overlay: rgba(0,0,0,0.30);
+  --code-bg: rgba(0,0,0,0.05);
+  --error-border: rgba(220,50,50,0.30);
+  --error-bg: rgba(220,50,50,0.06);
+  --error-text: rgba(180,30,30,0.90);
+  --bar-fill-start: rgba(59,130,246,0.70);
+  --bar-fill-end: rgba(59,130,246,0.15);
+  --bar-stroke: rgba(59,130,246,0.40);
+  --chart-text: rgba(0,0,0,0.65);
+  --chart-grid: rgba(0,0,0,0.08);
+  --chart-label: rgba(0,0,0,0.55);
+}
+
+/* System preference: apply light when no explicit theme set */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --bg: #f5f6fa;
+    --bg-gradient: radial-gradient(1200px 800px at 20% 0%, #e0e5f0 0%, #f5f6fa 55%) fixed;
+    --card: rgba(255,255,255,0.85);
+    --card2: rgba(255,255,255,0.95);
+    --text: rgba(0,0,0,0.88);
+    --muted: rgba(0,0,0,0.55);
+    --line: rgba(0,0,0,0.10);
+    --shadow: 0 10px 35px rgba(0,0,0,0.08);
+    --btn-bg: rgba(0,0,0,0.06);
+    --btn-hover: rgba(0,0,0,0.10);
+    --btn-secondary: rgba(0,0,0,0.08);
+    --pill-bg: rgba(0,0,0,0.04);
+    --file-border: rgba(0,0,0,0.15);
+    --file-bg: rgba(0,0,0,0.03);
+    --kpi-bg: rgba(0,0,0,0.03);
+    --thead-bg: rgba(0,0,0,0.04);
+    --thead-color: rgba(0,0,0,0.70);
+    --td-color: rgba(0,0,0,0.80);
+    --tr-even: rgba(0,0,0,0.02);
+    --tr-hover: rgba(0,0,0,0.05);
+    --chart-bg: rgba(0,0,0,0.03);
+    --modal-bg: linear-gradient(180deg, #ffffff, #f0f1f5);
+    --modal-overlay: rgba(0,0,0,0.30);
+    --code-bg: rgba(0,0,0,0.05);
+    --error-border: rgba(220,50,50,0.30);
+    --error-bg: rgba(220,50,50,0.06);
+    --error-text: rgba(180,30,30,0.90);
+    --bar-fill-start: rgba(59,130,246,0.70);
+    --bar-fill-end: rgba(59,130,246,0.15);
+    --bar-stroke: rgba(59,130,246,0.40);
+    --chart-text: rgba(0,0,0,0.65);
+    --chart-grid: rgba(0,0,0,0.08);
+    --chart-label: rgba(0,0,0,0.55);
+  }
 }
 
 * { box-sizing: border-box; }
@@ -15,7 +124,7 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  background: radial-gradient(1200px 800px at 20% 0%, #1a2240 0%, var(--bg) 55%) fixed;
+  background: var(--bg-gradient);
   color: var(--text);
 }
 
@@ -77,17 +186,17 @@ h1 {
 h2 {
   margin: 2px 0 12px;
   font-size: 16px;
-  color: rgba(255,255,255,0.90);
+  color: var(--text);
   letter-spacing: 0.01em;
 }
 
 .pill {
   font-size: 12px;
-  color: rgba(255,255,255,0.80);
+  color: var(--muted);
   border: 1px solid var(--line);
   padding: 8px 10px;
   border-radius: 999px;
-  background: rgba(0,0,0,0.15);
+  background: var(--pill-bg);
   white-space: nowrap;
 }
 
@@ -95,9 +204,9 @@ h2 {
   display: grid;
   gap: 8px;
   padding: 12px;
-  border: 1px dashed rgba(255,255,255,0.20);
+  border: 1px dashed var(--file-border);
   border-radius: 14px;
-  background: rgba(0,0,0,0.10);
+  background: var(--file-bg);
 }
 
 .file span {
@@ -107,7 +216,7 @@ h2 {
 
 input[type="file"] {
   width: 100%;
-  color: rgba(255,255,255,0.85);
+  color: var(--text);
 }
 
 .row {
@@ -118,18 +227,18 @@ input[type="file"] {
 
 button {
   border: 1px solid var(--line);
-  background: rgba(255,255,255,0.10);
+  background: var(--btn-bg);
   color: var(--text);
   padding: 10px 12px;
   border-radius: 14px;
   cursor: pointer;
 }
 
-button:hover { background: rgba(255,255,255,0.14); }
+button:hover { background: var(--btn-hover); }
 button:active { transform: translateY(1px); }
 
 button.secondary {
-  background: rgba(255,255,255,0.16);
+  background: var(--btn-secondary);
 }
 
 button.ghost {
@@ -146,9 +255,9 @@ button.ghost {
   margin-top: 12px;
   padding: 12px;
   border-radius: 14px;
-  border: 1px solid rgba(255,120,120,0.35);
-  background: rgba(255,80,80,0.10);
-  color: rgba(255,220,220,0.95);
+  border: 1px solid var(--error-border);
+  background: var(--error-bg);
+  color: var(--error-text);
   font-size: 13px;
   white-space: pre-wrap;
 }
@@ -167,7 +276,7 @@ button.ghost {
   padding: 12px;
   border-radius: 16px;
   border: 1px solid var(--line);
-  background: rgba(0,0,0,0.14);
+  background: var(--kpi-bg);
 }
 
 .kpi .label {
@@ -203,25 +312,25 @@ table {
 thead th {
   text-align: left;
   font-size: 12px;
-  color: rgba(255,255,255,0.80);
-  background: rgba(0,0,0,0.22);
+  color: var(--thead-color);
+  background: var(--thead-bg);
   padding: 10px 12px;
   border-bottom: 1px solid var(--line);
 }
 
 tbody td {
   padding: 10px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  color: rgba(255,255,255,0.88);
+  border-bottom: 1px solid var(--line);
+  color: var(--td-color);
   font-size: 13px;
 }
 
 tbody tr:nth-child(even) td {
-  background: rgba(255,255,255,0.04);
+  background: var(--tr-even);
 }
 
 tbody tr:hover td {
-  background: rgba(255,255,255,0.08);
+  background: var(--tr-hover);
 }
 
 tbody td.cell-min {
@@ -244,7 +353,7 @@ tbody td.cell-max {
 .chartWrap {
   border-radius: 14px;
   border: 1px solid var(--line);
-  background: rgba(0,0,0,0.12);
+  background: var(--chart-bg);
   overflow: hidden;
 }
 
@@ -266,7 +375,7 @@ canvas {
   height: 32px;
   border-radius: 50%;
   border: 1px solid var(--line);
-  background: rgba(255,255,255,0.10);
+  background: var(--btn-bg);
   color: var(--text);
   font-size: 15px;
   font-weight: 700;
@@ -278,13 +387,13 @@ canvas {
   flex-shrink: 0;
 }
 
-.help-btn:hover { background: rgba(255,255,255,0.18); }
+.help-btn:hover { background: var(--btn-hover); }
 
 /* Modal */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.60);
+  background: var(--modal-overlay);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -296,7 +405,7 @@ canvas {
 
 .modal-box {
   position: relative;
-  background: linear-gradient(180deg, #1c2540, #131825);
+  background: var(--modal-bg);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: 0 24px 60px rgba(0,0,0,0.6);
@@ -324,12 +433,12 @@ canvas {
   justify-content: center;
   padding: 0;
   border: 1px solid var(--line);
-  background: rgba(255,255,255,0.08);
+  background: var(--btn-bg);
   color: var(--muted);
   cursor: pointer;
 }
 
-.modal-close:hover { background: rgba(255,255,255,0.16); color: var(--text); }
+.modal-close:hover { background: var(--btn-hover); color: var(--text); }
 
 .modal-section {
   margin-bottom: 22px;
@@ -341,7 +450,7 @@ canvas {
   margin: 0 0 8px;
   font-size: 13px;
   font-weight: 600;
-  color: rgba(255,255,255,0.90);
+  color: var(--text);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
@@ -350,10 +459,10 @@ canvas {
   padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid var(--line);
-  background: rgba(0,0,0,0.28);
+  background: var(--code-bg);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 13px;
-  color: rgba(255,255,255,0.88);
+  color: var(--td-color);
   line-height: 1.6;
   white-space: pre;
   overflow-x: auto;
@@ -364,3 +473,23 @@ canvas {
   font-size: 12px;
   color: var(--muted);
 }
+
+/* Theme toggle */
+.theme-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--btn-bg);
+  color: var(--text);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.theme-btn:hover { background: var(--btn-hover); }

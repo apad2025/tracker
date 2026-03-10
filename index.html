@@ -15,6 +15,7 @@
       </div>
       <div class="header-right">
         <div class="pill" id="rangePill">No data loaded</div>
+        <button id="themeBtn" class="ghost theme-btn" title="Toggle theme"></button>
         <button id="helpBtn" class="ghost help-btn" title="Help">?</button>
       </div>
     </header>
@@ -113,6 +114,39 @@
     helpBtn.addEventListener('click', () => { helpModal.hidden = false; });
     helpClose.addEventListener('click', () => { helpModal.hidden = true; });
     helpModal.addEventListener('click', e => { if (e.target === helpModal) helpModal.hidden = true; });
+
+    // Theme toggle
+    const themeBtn = document.getElementById('themeBtn');
+    function getEffectiveTheme() {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark' || stored === 'light') return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+    function applyTheme(theme) {
+      // When theme matches system preference and no stored pref, remove data-theme
+      // to let the media query handle it. Otherwise set explicitly.
+      const stored = localStorage.getItem('theme');
+      if (stored) {
+        document.documentElement.setAttribute('data-theme', theme);
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+      themeBtn.textContent = theme === 'dark' ? '\u2600' : '\u263D';
+      themeBtn.title = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+      // Re-render chart if data is loaded to pick up new colors
+      if (typeof render === 'function' && (state.screen.length || state.sleep.length)) render();
+    }
+    applyTheme(getEffectiveTheme());
+    themeBtn.addEventListener('click', () => {
+      const current = getEffectiveTheme();
+      const next = current === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    });
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+      if (!localStorage.getItem('theme')) applyTheme(getEffectiveTheme());
+    });
   </script>
 </body>
 </html>
