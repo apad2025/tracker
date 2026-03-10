@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weekly Stats: Sleep + Screen Time</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div>
+        <h1>Weekly Stats</h1>
+        <p class="sub">Sleep and screen time tracker</p>
+      </div>
+      <div class="header-right">
+        <div class="pill" id="rangePill">No data loaded</div>
+        <button id="helpBtn" class="ghost help-btn" title="Help">?</button>
+      </div>
+    </header>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal-overlay" hidden>
+      <div class="modal-box">
+        <button id="helpClose" class="modal-close ghost">✕</button>
+        <h2>How should I structure my files?</h2>
+
+        <div class="modal-section">
+          <p class="modal-filename">screen_time.csv</p>
+          <pre class="modal-code">Date,Screen Time
+01/06/26,2:34
+01/07/26,1:15
+01/08/26,3:02</pre>
+          <p class="modal-note">Date in mm/dd/yy &nbsp;·&nbsp; Screen Time in hh:mm</p>
+        </div>
+
+        <div class="modal-section">
+          <p class="modal-filename">sleep.csv</p>
+          <pre class="modal-code">Date,Sleep,Wake
+01/06/26,23:00,07:15
+01/07/26,22:30,06:45
+01/08/26,00:10,08:00</pre>
+          <p class="modal-note">Date in mm/dd/yy &nbsp;·&nbsp; Sleep and Wake in 24-hour time (HH:MM)</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="card" id="loadCard">
+      <h2>Load your CSVs</h2>
+      <div class="grid inputs">
+        <label class="file">
+          <span>screen_time.csv</span>
+          <input id="screenFile" type="file" accept=".csv,text/csv" />
+        </label>
+        <label class="file">
+          <span>sleep.csv</span>
+          <input id="sleepFile" type="file" accept=".csv,text/csv" />
+        </label>
+      </div>
+      <div class="row">
+        <button id="demoBtn" class="secondary">Load demo data</button>
+        <button id="clearBtn" class="ghost">Clear</button>
+      </div>
+      <!-- <p class="hint">
+        Tip: If you host these files (or run a local server), you can switch to fetch()-based loading.
+        File pickers work from a plain file:// open.
+      </p> -->
+      <div class="error" id="errorBox" hidden></div>
+    </section>
+
+    <section class="card">
+      <h2>Averages this week</h2>
+      <div class="kpis" id="weeklyKpis"></div>
+      <div class="mini" id="weeklyNotes"></div>
+    </section>
+
+    <section class="card">
+      <h2>Details</h2>
+      <div class="tableWrap">
+        <table id="dailyTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Sleep</th>
+              <th>Bed</th>
+              <th>Wake</th>
+              <th>Screen time</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Screen time this week</h2>
+      <div class="chartWrap">
+        <canvas id="screenChart" width="900" height="280" aria-label="Screen time bar chart"></canvas>
+      </div>
+      <div class="mini" id="screenChartNote"></div>
+    </section>
+
+    <footer class="footer">
+      <span>Local-only. No data leaves your browser.</span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    const helpBtn   = document.getElementById('helpBtn');
+    const helpModal = document.getElementById('helpModal');
+    const helpClose = document.getElementById('helpClose');
+    helpBtn.addEventListener('click', () => { helpModal.hidden = false; });
+    helpClose.addEventListener('click', () => { helpModal.hidden = true; });
+    helpModal.addEventListener('click', e => { if (e.target === helpModal) helpModal.hidden = true; });
+  </script>
+</body>
+</html>
