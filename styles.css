@@ -359,7 +359,7 @@ tbody td.cell-max {
 
 canvas {
   width: 100%;
-  height: auto;
+  height: 280px;
   display: block;
 }
 

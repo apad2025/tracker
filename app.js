@@ -508,6 +508,13 @@ function renderScreenBarChart(rangeStart, rangeEnd) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
+  // Scale for high-DPI displays
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+
   // Build a 7-day key list
   const keys = [];
   const d = new Date(rangeStart);
@@ -523,8 +530,8 @@ function renderScreenBarChart(rangeStart, rangeEnd) {
   const maxVal = 480; // fixed 8 hours
   const padL = 46, padR = 16, padT = 16, padB = 44;
 
-  const W = canvas.width;
-  const H = canvas.height;
+  const W = rect.width;
+  const H = rect.height;
   ctx.clearRect(0, 0, W, H);
 
   // Read theme colors from CSS variables
