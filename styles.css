@@ -262,6 +262,26 @@ button.ghost {
   white-space: pre-wrap;
 }
 
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card-header h2 {
+  margin-bottom: 0;
+}
+
+.toggle-btn {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-bottom: 12px;
+}
+
 .kpis {
   display: grid;
   grid-template-columns: 1fr;

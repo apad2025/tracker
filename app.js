@@ -11,11 +11,14 @@ const els = {
   screenChart: document.getElementById('screenChart'),
   screenChartNote: document.getElementById('screenChartNote'),
   loadCard: document.getElementById('loadCard'),
+  toggleCumulativeBtn: document.getElementById('toggleCumulativeBtn'),
+  weeklyHeading: document.getElementById('weeklyHeading'),
 };
 
 let state = {
   screen: [], // {date: Date, minutes: number}
   sleep: [],  // {date: Date, sleepMinOfDay: number, wakeMinOfDay: number, durationMin: number}
+  cumulative: false,
 };
 
 function showError(msg) {
@@ -313,11 +316,15 @@ function render() {
 
   els.rangePill.textContent = `Weekly window: ${formatDate(weekStart)} – ${formatDate(weekEnd)}`;
 
-  const weekly = computeStats(weekStart, weekEnd);
+  // Toggle button state
+  els.toggleCumulativeBtn.textContent = state.cumulative ? 'Switch to weekly glance' : 'Switch to cumulative stats';
+  els.weeklyHeading.textContent = state.cumulative ? 'Cumulative averages' : 'Averages this week';
 
-  renderKpis(els.weeklyKpis, weekly.kpis);
+  const stats = state.cumulative ? computeStats(null, null) : computeStats(weekStart, weekEnd);
 
-  els.weeklyNotes.textContent = weekly.notes;
+  renderKpis(els.weeklyKpis, stats.kpis);
+
+  els.weeklyNotes.textContent = stats.notes;
 
   renderDailyTable(weekStart, weekEnd);
 
@@ -620,5 +627,9 @@ els.screenFile.addEventListener('change', handleFilesChanged);
 els.sleepFile.addEventListener('change', handleFilesChanged);
 els.demoBtn.addEventListener('click', loadDemo);
 els.clearBtn.addEventListener('click', clearAll);
+els.toggleCumulativeBtn.addEventListener('click', () => {
+  state.cumulative = !state.cumulative;
+  render();
+});
 
 render();
